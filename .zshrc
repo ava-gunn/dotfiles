@@ -75,6 +75,10 @@ alias vim='nvim'
 alias c='clear'
 alias vi='nvim'
 alias cat='bat'
+alias 綺麗に='clear'
+alias 家="cd ~"
+alias 物="cd ~/Developer/monorepo/"
+alias ヴィ="vim"
 
 # Shell integrations
 eval "$(fzf --zsh)"
