@@ -74,7 +74,26 @@ alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
 alias vi='nvim'
+alias cat='bat'
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    ls)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    cat)          fzf "$@" --preview 'bat --style=numbers --color=always --line-range :500 {}' ;;
+    vim)          fzf "$@" --preview 'bat --style=numbers --color=always --line-range :500 {}' ;;
+    *)            fzf "$@" ;;
+  esac
+}
