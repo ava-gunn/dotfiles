@@ -8,6 +8,10 @@
       pkgs.neovim
       pkgs.tmux
       pkgs.stow
+      pkgs.bat
+      pkgs.tree
+      pkgs.fzf
+      pkgs.zoxide
     ];
     file.".config" = { source = ./.config; recursive = true; };
   };
