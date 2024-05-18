@@ -9,6 +9,7 @@
       pkgs.tmux
       pkgs.stow
     ];
+    file.".config" = { source = ./.config; recursive = true; };
   };
   xdg.enable = true;
   programs.home-manager.enable = true;
