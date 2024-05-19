@@ -13,6 +13,7 @@
       pkgs.fzf
       pkgs.zoxide
       pkgs.eza
+      pkgs.alacritty
     ];
     file.".config" = { source = ./.config; recursive = true; };
   };
