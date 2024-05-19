@@ -15,7 +15,6 @@
       pkgs.eza
       pkgs.alacritty
     ];
-    file.".config" = { source = ./.config; recursive = true; };
   };
   xdg.enable = true;
   programs.home-manager.enable = true;
