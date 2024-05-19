@@ -79,13 +79,15 @@ alias 綺麗に='clear'
 alias 家="cd ~"
 alias 物="cd ~/Developer/monorepo/"
 alias ヴィ="vim"
-alias ls="exa --icons"
+alias ls="eza --color=always --icons"
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+export BAT_THEME=tokyonight_night
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
