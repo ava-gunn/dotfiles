@@ -79,6 +79,7 @@ alias 綺麗に='clear'
 alias 家="cd ~"
 alias 物="cd ~/Developer/monorepo/"
 alias ヴィ="vim"
+alias ls="exa --icons"
 
 # Shell integrations
 eval "$(fzf --zsh)"

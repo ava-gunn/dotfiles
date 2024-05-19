@@ -12,6 +12,7 @@
       pkgs.tree
       pkgs.fzf
       pkgs.zoxide
+      pkgs.eza
     ];
     file.".config" = { source = ./.config; recursive = true; };
   };
