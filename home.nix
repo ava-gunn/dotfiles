@@ -14,6 +14,7 @@
       pkgs.zoxide
       pkgs.eza
       pkgs.alacritty
+      pkgs.fd
     ];
   };
   xdg.enable = true;
