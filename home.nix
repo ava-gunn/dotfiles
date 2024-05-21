@@ -15,6 +15,7 @@
       pkgs.eza
       pkgs.alacritty
       pkgs.fd
+      pkgs.less
     ];
   };
   xdg.enable = true;

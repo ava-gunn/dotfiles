@@ -81,7 +81,11 @@ alias 物="cd ~/Developer/monorepo/"
 alias ヴィ="vim"
 alias ls="eza --color=always --icons"
 alias vimconfig="vim ~/.config/nvim/init.lua"
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
+
+mdn() {
+  open "https://developer.mozilla.org/en-US/search?q=$@"
+}
 
 # Shell integrations
 eval "$(fzf --zsh)"
