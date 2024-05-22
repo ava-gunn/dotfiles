@@ -32,4 +32,8 @@ return {
     end,
   },
   { "folke/twilight.nvim" },
+  {
+    "jim-fx/sudoku.nvim",
+    cmd = "Sudoku",
+  },
 }
