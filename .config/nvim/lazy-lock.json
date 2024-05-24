@@ -6,6 +6,7 @@
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "39e2eda76828d88b773cc27a3f61d2ad782c922d" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
+  "compter.nvim": { "branch": "master", "commit": "954fa6e860cb0019fb263a8defae0675fcfdf9e8" },
   "conform.nvim": { "branch": "master", "commit": "00f9d91391b04b1935e2f15948bd96cc111e7d3a" },
   "dashboard-nvim": { "branch": "master", "commit": "5182c09ac8085dc73b78ad0ea9f5479c9a866fc4" },
   "dressing.nvim": { "branch": "master", "commit": "572314728cb1ce012e825fd66331f52c94acac12" },

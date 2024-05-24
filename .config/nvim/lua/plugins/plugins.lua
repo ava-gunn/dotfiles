@@ -35,5 +35,45 @@ return {
   {
     "jim-fx/sudoku.nvim",
     cmd = "Sudoku",
+    config = function()
+      require("sudoku").setup({
+        -- configuration ...
+      })
+    end,
+  },
+  {
+    "RutaTang/compter.nvim",
+    config = function()
+      require("compter").setup({
+        templates = {
+          {
+            pattern = [[\<\(true\|false\|TRUE\|FALSE\|True\|False\)\>]],
+            priority = 100,
+            increase = function(content)
+              local switch = {
+                ["true"] = "false",
+                ["false"] = "true",
+                ["True"] = "False",
+                ["False"] = "True",
+                ["TRUE"] = "FALSE",
+                ["FALSE"] = "TRUE",
+              }
+              return switch[content], true
+            end,
+            decrease = function(content)
+              local switch = {
+                ["true"] = "false",
+                ["false"] = "true",
+                ["True"] = "False",
+                ["False"] = "True",
+                ["TRUE"] = "FALSE",
+                ["FALSE"] = "TRUE",
+              }
+              return switch[content], true
+            end,
+          },
+        },
+      })
+    end,
   },
 }
