@@ -88,4 +88,10 @@ return {
       })
     end,
   },
+  {
+    "tris203/precognition.nvim",
+    config = {
+      startVisible = true,
+    },
+  },
 }
