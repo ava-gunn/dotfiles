@@ -16,6 +16,7 @@
       pkgs.alacritty
       pkgs.fd
       pkgs.less
+      pkgs.gh
     ];
   };
   xdg.enable = true;
