@@ -47,6 +47,18 @@ return {
       require("compter").setup({
         templates = {
           {
+            pattern = [[-\?\d\+]],
+            priority = 0,
+            increase = function(content)
+              content = tonumber(content)
+              return content + 1, true
+            end,
+            decrease = function(content)
+              content = tonumber(content)
+              return content - 1, true
+            end,
+          },
+          {
             pattern = [[\<\(true\|false\|TRUE\|FALSE\|True\|False\)\>]],
             priority = 100,
             increase = function(content)
