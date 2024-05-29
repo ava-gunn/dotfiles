@@ -1,0 +1,40 @@
+prSections:
+  - title: My Pull Requests
+    filters: is:open author:@me repo:nintendo-of-america/nintendo.com
+  - title: Needs Review
+    filters: is:open repo:nintendo-of-america/nintendo.com
+defaults:
+  preview:
+    open: true
+    width: 50
+  prsLimit: 20
+  issuesLimit: 20
+  view: prs
+  layout:
+    prs:
+      updatedAt:
+        width: 7
+      repo:
+        width: 15
+      author:
+        width: 15
+      assignees:
+        width: 20
+        hidden: true
+      base:
+        width: 15
+        hidden: true
+      lines:
+        width: 16
+  refetchIntervalMinutes: 30
+keybindings:
+  issues: []
+  prs: []
+repoPaths: {}
+theme:
+  ui:
+    table:
+      showSeparator: true
+pager:
+  diff: ""
+confirmQuit: false
