@@ -17,6 +17,7 @@
       pkgs.fd
       pkgs.less
       pkgs.gh
+      pkgs.mpw
     ];
   };
   xdg.enable = true;
