@@ -18,6 +18,7 @@
       pkgs.less
       pkgs.gh
       pkgs.mpw
+      pkgs.karabiner-elements
     ];
   };
   xdg.enable = true;
