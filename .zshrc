@@ -35,6 +35,11 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::command-not-found
 
+# Vi Mode
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+EDITOR=nvim
+
 # Load completions
 autoload -Uz compinit && compinit
 

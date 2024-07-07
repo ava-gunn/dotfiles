@@ -76,29 +76,30 @@
 # A REFERENCE ONLY, WHEN MAKING YOUR OWN CONFIGURATION..          #
 # ############################################################### #
 
-shift - delete : \
-    yabai -m signal --add label=float_next_window_created event=window_created action='yabai -m signal --remove float_next_window_created; yabai -m signal --remove float_next_application_launched; yabai -m window $YABAI_WINDOW_ID --toggle float' ; \
-    yabai -m signal --add label=float_next_application_launched event=application_launched action='yabai -m signal --remove float_next_window_created; yabai -m signal --remove float_next_application_launched; yabai -m query --windows | jq -r ".[] | select(.pid == $YABAI_PROCESS_ID).id" | xargs -I{} yabai -m window {} --toggle float' ; \
-    osascript -e 'tell application "iTerm2" to create window with default profile command ""' || open -b com.googlecode.iTerm2
+# shift - delete : \
+#     yabai -m signal --add label=float_next_window_created event=window_created action='yabai -m signal --remove float_next_window_created; yabai -m signal --remove float_next_application_launched; yabai -m window $YABAI_WINDOW_ID --toggle float' ; \
+#     yabai -m signal --add label=float_next_application_launched event=application_launched action='yabai -m signal --remove float_next_window_created; yabai -m signal --remove float_next_application_launched; yabai -m query --windows | jq -r ".[] | select(.pid == $YABAI_PROCESS_ID).id" | xargs -I{} yabai -m window {} --toggle float' ; \
+#     osascript -e 'tell application "iTerm2" to create window with default profile command ""' || open -b com.googlecode.iTerm2
 
 # focus window
-ctrl - h : yabai -m window --focus prev
-ctrl - l : yabai -m window --focus next
+# ctrl - h : yabai -m window --focus prev
+# ctrl - l : yabai -m window --focus next
 
 # Focus screen
-ctrl + shift - h : yabai -m space --focus prev
-ctrl + shift - l : yabai -m space --focus next
+# ctrl + shift - h : yabai -m space --focus prev
+# ctrl + shift - l : yabai -m space --focus next
 
 # focus monitor
-ctrl - 1  : yabai -m display --focus 1
-ctrl - 2  : yabai -m display --focus 2
+# ctrl - 1  : yabai -m display --focus 1
+# ctrl - 2  : yabai -m display --focus 2
 
 # Move window to screen
-ctrl - 3 : yabai -m window --display recent; yabai -m display --focus recent
+# ctrl - 3 : yabai -m window --display recent; yabai -m display --focus recent
+ctrl - left : yabai -m window --focus west || \
+              yabai -m window --focus $(yabai -m query --spaces --display west | jq '.[] | select(."is-visible" == true) | ."last-window"')
 
-# send window to monitor and follow focus
-ctrl + shift - 1  : yabai -m window --display 1; yabai -m display --focus 1
-ctrl + shift - 2  : yabai -m window --display 2; yabai -m display --focus 2
+ctrl - right: yabai -m window --focus east || \
+              yabai -m window --focus $(yabai -m query --spaces --display east | jq '.[] | select(."is-visible" == true) | ."first-window"')
 
 # swap managed window
 # shift + alt - h : yabai -m window --swap north
