@@ -87,6 +87,7 @@ alias ヴィ="vim"
 alias ls="eza --color=always --icons"
 alias vimconfig="vim ~/.config/nvim/init.lua"
 alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
+alias la="ls -la"
 
 mdn() {
   open "https://developer.mozilla.org/en-US/search?q=$@"
