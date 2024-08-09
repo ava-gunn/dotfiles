@@ -72682,7 +72682,7 @@ printf -- $'\033]6;1;bg;red;brightness;40\a\033]6;1;bg;green;brightness;42\a\033
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>Scrollback Lines</key>
 			<integer>1000</integer>
 			<key>Selected Text Color</key>

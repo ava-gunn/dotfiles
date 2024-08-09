@@ -19,8 +19,6 @@
       pkgs.gh
       pkgs.mpw
       pkgs.karabiner-elements
-      pkgs.yabai
-      pkgs.skhd
     ];
   };
   xdg.enable = true;
