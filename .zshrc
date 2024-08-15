@@ -88,6 +88,7 @@ alias ls="eza --color=always --icons"
 alias vimconfig="vim ~/.config/nvim/init.lua"
 alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
 alias la="ls -la"
+alias gr="grep -Fr --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.next --exclude-dir=.git --exclude-dir=.turbo --exclude-dir=out"
 
 mdn() {
   open "https://developer.mozilla.org/en-US/search?q=$@"
