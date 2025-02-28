@@ -1,0 +1,5 @@
+NVIM v0.10.0
+Build type: Release
+LuaJIT 2.1.1693350652
+Run "nvim -V1 -v" for more info
+tmux 3.4

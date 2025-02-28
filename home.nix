@@ -19,6 +19,8 @@
       pkgs.gh
       pkgs.mpw
       pkgs.karabiner-elements
+      pkgs.rustup
+      pkgs.yazi
     ];
   };
   xdg.enable = true;
