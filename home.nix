@@ -1,9 +1,10 @@
 { pkgs, ... }: {
   home = {
-    stateVersion = "23.11";
+    stateVersion = "24.05";
     username = "clark";
     homeDirectory = "/Users/clark";
     packages = [
+      pkgs.ghostty
       pkgs.git
       pkgs.neovim
       pkgs.tmux
@@ -13,10 +14,8 @@
       pkgs.fzf
       pkgs.zoxide
       pkgs.eza
-      pkgs.alacritty
       pkgs.fd
       pkgs.less
-      pkgs.gh
       pkgs.mpw
       pkgs.karabiner-elements
       pkgs.rustup
