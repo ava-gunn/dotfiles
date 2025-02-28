@@ -4,7 +4,6 @@
     username = "clark";
     homeDirectory = "/Users/clark";
     packages = [
-      pkgs.ghostty
       pkgs.git
       pkgs.neovim
       pkgs.tmux
@@ -20,6 +19,7 @@
       pkgs.karabiner-elements
       pkgs.rustup
       pkgs.yazi
+      pkgs.hyfetch
     ];
   };
   xdg.enable = true;

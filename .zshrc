@@ -134,3 +134,5 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/c
 
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/config/php/84/"
+
+hyfetch --ascii /Users/clark/dotfiles/ascii.txt
