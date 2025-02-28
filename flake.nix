@@ -1,5 +1,5 @@
 {
-  description = "Clark's dotfiles";
+  description = "Ava's dotfiles";
 
   # inputs are other flakes you use within your own flake, dependencies
   # if you will
