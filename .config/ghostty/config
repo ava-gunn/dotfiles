@@ -13,3 +13,5 @@ background-blur = 20
 
 macos-titlebar-style = "hidden"
 
+custom-shader = shaders/bloom.glsl
+
