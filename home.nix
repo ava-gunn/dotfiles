@@ -20,6 +20,8 @@
       pkgs.rustup
       pkgs.yazi
       pkgs.hyfetch
+      pkgs.unimatrix
+      pkgs.vimgolf
     ];
   };
   xdg.enable = true;

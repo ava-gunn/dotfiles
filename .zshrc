@@ -38,7 +38,7 @@ zinit snippet OMZP::command-not-found
 # Vi Mode
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
-EDITOR=nvim
+set EDITOR=nvim
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -135,4 +135,4 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/c
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/config/php/84/"
 
-hyfetch --ascii /Users/clark/dotfiles/ascii.txt
+# hyfetch --ascii /Users/clark/dotfiles/ascii.txt
