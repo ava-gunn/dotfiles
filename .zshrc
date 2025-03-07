@@ -136,3 +136,13 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/c
 export HERD_PHP_84_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/config/php/84/"
 
 # hyfetch --ascii /Users/clark/dotfiles/ascii.txt
+#
+
+# bun completions
+[ -s "/Users/clark/.bun/_bun" ] && source "/Users/clark/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias ccs="codecrafters"
