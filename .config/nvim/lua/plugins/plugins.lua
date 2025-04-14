@@ -138,4 +138,18 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "jsx", "tsx", "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
   },
+  {
+    "julienvincent/nvim-paredit",
+    config = function()
+      require("nvim-paredit").setup()
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        clojure = { "cljstyle" },
+      },
+    },
+  },
 }

@@ -88,7 +88,8 @@ alias ls="eza --color=always --icons"
 alias vimconfig="vim ~/.config/nvim/init.lua"
 alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
 alias la="ls -la"
-alias gr="grep -Fr --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.next --exclude-dir=.git --exclude-dir=.turbo --exclude-dir=out --exclude-dir=playwright-report --exclude-dir=design-system"
+alias art="php artisan"
+alias gr="grep -Fr --exclude-dir=vendor --exclude-dir=storage --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.next --exclude-dir=.git --exclude-dir=.turbo --exclude-dir=out --exclude-dir=playwright-report --exclude-dir=design-system"
 
 mdn() {
   open "https://developer.mozilla.org/en-US/search?q=$@"
@@ -146,3 +147,12 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 alias ccs="codecrafters"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}

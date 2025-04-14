@@ -19,6 +19,8 @@
       pkgs.karabiner-elements
       pkgs.rustup
       pkgs.yazi
+      pkgs.clojure
+      pkgs.leiningen
     ];
   };
   xdg.enable = true;
