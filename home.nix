@@ -16,11 +16,18 @@
       pkgs.fd
       pkgs.less
       pkgs.mpw
+      pkgs.ghostty
+      pkgs.aerospace
       pkgs.karabiner-elements
+      pkgs.raycast
       pkgs.rustup
       pkgs.yazi
+      pkgs.jdk
       pkgs.clojure
       pkgs.leiningen
+      pkgs.babashka
+      pkgs.janet
+      pkgs.jpm
     ];
   };
   xdg.enable = true;
