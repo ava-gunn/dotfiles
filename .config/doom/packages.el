@@ -48,3 +48,4 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 (package! evil-terminal-cursor-changer)
+(package! solaire-mode :disable t)

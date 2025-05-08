@@ -75,6 +75,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
+alias astro='NVIM_APPNAME=astro nvim'
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
@@ -89,7 +90,10 @@ alias vimconfig="vim ~/.config/nvim/init.lua"
 alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
 alias la="ls -la"
 alias art="php artisan"
-alias gr="grep -Fr --exclude-dir=vendor --exclude-dir=storage --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.next --exclude-dir=.git --exclude-dir=.turbo --exclude-dir=out --exclude-dir=playwright-report --exclude-dir=design-system"
+alias gr="grep -Fr --exclude-dir=vendor --exclude-dir=storage --exclude-dir=node_modules --exclude-dir=.yarn --exclude-dir=dist --exclude-dir=.next --exclude-dir=.git --exclude-dir=.turbo --exclude-dir=out --exclude-dir=playwright-report --exclude-dir=design-system"
+# alias emacs="emacsclient -a '' -c"
+alias em="emacsclient -a '' -c"
+alias refresh="echo \"(require '[clojure.tools.namespace.repl :refer [refresh]])\" | pbcopy"
 
 mdn() {
   open "https://developer.mozilla.org/en-US/search?q=$@"

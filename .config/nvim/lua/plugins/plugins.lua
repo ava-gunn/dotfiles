@@ -93,16 +93,16 @@ return {
       })
     end,
   },
-  {
-    "tris203/precognition.nvim",
-    config = {
-      startVisible = true,
-    },
-  },
+  -- {
+  --   "tris203/precognition.nvim",
+  --   config = {
+  --     startVisible = true,
+  --   },
+  -- },
   {
     "m4xshen/hardtime.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {},
+    opts = { timeout = 8000 },
   },
   {
     "folke/snacks.nvim",
@@ -138,12 +138,8 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "jsx", "tsx", "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
   },
-  {
-    "julienvincent/nvim-paredit",
-    config = function()
-      require("nvim-paredit").setup()
-    end,
-  },
+  -- { "Olical/conjure" },
+  -- { "eraserhd/parinfer-rust", build = "cargo build --release" },
   {
     "stevearc/conform.nvim",
     opts = {
@@ -151,5 +147,9 @@ return {
         clojure = { "cljstyle" },
       },
     },
+  },
+  -- Janet stuff
+  {
+    "bakpakin/janet.vim",
   },
 }

@@ -1,4 +1,4 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
@@ -34,13 +34,28 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-tokyo-night)
 
+;; Your existing transparency settings:
+(doom/set-frame-opacity 0)
+(set-frame-parameter nil 'alpha-background 5)
+(add-to-list 'default-frame-alist '(alpha-background . 5))
+
+;; local leader
+(setq doom-localleader-key "\\")
+
+;; Cider use Rebl
+(setq cider-repl-type 'rebl)
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+
+;; Don't ask for quit confirmation.
+(setq confirm-kill-emacs nil)
+
+;; Set relative line numbers
+(setq display-line-numbers-type 'relative)
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -49,7 +64,7 @@
 ;;   (after! PACKAGE
 ;;     (setq x y))
 ;;
-;; The exceptions to this rule:
+;; The exceptions to this rule
 ;;
 ;;   - Setting file/directory variables (like `org-directory')
 ;;   - Setting variables which explicitly tell you to set them before their

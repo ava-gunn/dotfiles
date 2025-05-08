@@ -1,8 +1,7 @@
 theme = tokyonight_moon
 
-font-family="MesloLGS NF"
+font-family="FiraCode Nerd Font Mono"
 font-size=17
-font-feature=-liga
 font-thicken=false
 
 background = #222334
