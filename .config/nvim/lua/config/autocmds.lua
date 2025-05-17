@@ -8,5 +8,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.b.cmp_enabled = false
     -- Disable friendly-snippets for Clojure files
     vim.b.snippets_enabled = false
+
+    local mini_pairs = require("mini.pairs")
+    if mini_pairs then
+      -- Override ONLY single-quote behavior (allow typing ' but no auto-pair)
+      mini_pairs.setup({
+        mappings = {
+          ["'"] = { action = "open", pair = "'", neigh_pattern = "[^\\].", register = { cr = false } },
+        },
+      })
+    end
   end,
 })

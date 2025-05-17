@@ -33,3 +33,10 @@
   xdg.enable = true;
   programs.home-manager.enable = true;
 }
+
+# Non nix pkgs
+# svim https://github.com/FelixKratz/SketchyVim
+# brew tap FelixKratz/formulae
+# brew install svim
+# brew services start svim
+# Homerow
