@@ -38,15 +38,6 @@ return {
   },
   { "folke/twilight.nvim" },
   {
-    "jim-fx/sudoku.nvim",
-    cmd = "Sudoku",
-    config = function()
-      require("sudoku").setup({
-        -- configuration ...
-      })
-    end,
-  },
-  {
     "RutaTang/compter.nvim",
     config = function()
       require("compter").setup({
@@ -99,11 +90,11 @@ return {
   --     startVisible = true,
   --   },
   -- },
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = { timeout = 8000 },
-  },
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   opts = { timeout = 8000 },
+  -- },
   {
     "folke/snacks.nvim",
     keys = {
@@ -132,24 +123,27 @@ return {
     ---@type render.md.UserConfig
     opts = {},
   },
-  {
-    "razak17/tailwind-fold.nvim",
-    opts = {},
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ft = { "jsx", "tsx", "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
-  },
+  -- {
+  --   "razak17/tailwind-fold.nvim",
+  --   opts = {},
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   ft = { "jsx", "tsx", "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+  -- },
   -- { "Olical/conjure" },
   -- { "eraserhd/parinfer-rust", build = "cargo build --release" },
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        clojure = { "cljstyle" },
-      },
-    },
-  },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   opts = {
+  --     formatters_by_ft = {
+  --       clojure = { "cljstyle" },
+  --     },
+  --   },
+  -- },
   -- Janet stuff
-  {
-    "bakpakin/janet.vim",
-  },
+  -- {
+  --   "bakpakin/janet.vim",
+  -- },
+  -- {
+  --   "github/copilot.vim",
+  -- },
 }
