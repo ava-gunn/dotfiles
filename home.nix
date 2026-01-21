@@ -15,11 +15,10 @@
       pkgs.eza
       pkgs.fd
       pkgs.less
-      pkgs.mpw
-      pkgs.ghostty
+      # pkgs.ghostty
       pkgs.aerospace
       pkgs.karabiner-elements
-      pkgs.raycast
+      # pkgs.raycast
       pkgs.rustup
       pkgs.yazi
       pkgs.jdk
