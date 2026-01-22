@@ -4,6 +4,8 @@
     username = "ava";
     homeDirectory = "/Users/ava";
     packages = [
+      pkgs.bash
+      pkgs.lua
       pkgs.git
       pkgs.neovim
       pkgs.tmux
