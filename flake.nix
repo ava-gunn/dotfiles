@@ -18,7 +18,7 @@
   outputs = { nixpkgs, home-manager, ... }: {
     home-manager.useGlobalPkgs = true;
     homeConfigurations = {
-      "clark" = home-manager.lib.homeManagerConfiguration {
+      "ava" = home-manager.lib.homeManagerConfiguration {
         # darwin is the macOS kernel and aarch64 means ARM, i.e. apple silicon
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ ./home.nix ];
