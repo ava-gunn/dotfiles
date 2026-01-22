@@ -7,6 +7,7 @@
       pkgs.bash
       pkgs.lua
       pkgs.git
+      pkgs.gh
       pkgs.neovim
       pkgs.tmux
       pkgs.stow
