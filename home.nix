@@ -20,7 +20,6 @@
       pkgs.less
       pkgs.aerospace
       pkgs.karabiner-elements
-      # pkgs.raycast
       pkgs.rustup
       pkgs.yazi
       pkgs.jdk
