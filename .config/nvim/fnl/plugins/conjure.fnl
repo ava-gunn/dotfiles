@@ -1,6 +1,6 @@
-[;; Conjure — REPL client (nREPL for jank/Clojure)
+[;; Conjure — REPL client (nREPL for jank/Clojure, netrepl/stdio for Janet)
  {1 "Olical/conjure"
-  :ft ["clojure" "jank"]
+  :ft ["clojure" "jank" "janet"]
   :build false
   :dependencies ["PaterJason/cmp-conjure"]
   :config (fn []
@@ -20,12 +20,23 @@
               (table.insert config.sources {:name "conjure"})
               (cmp.setup config)))}
 
- ;; Ensure clojure treesitter parser is installed (covers .jank files)
+ ;; Ensure treesitter parsers are installed
  {1 "nvim-treesitter/nvim-treesitter"
   :opts (fn [_ opts]
           (when (= (type opts.ensure_installed) "table")
-            (vim.list_extend opts.ensure_installed ["clojure"])))}
+            (vim.list_extend opts.ensure_installed ["clojure" "janet_simple"])))}
 
  ;; Paired delimiter support for s-expressions
  {1 "gpanders/nvim-parinfer"
-  :ft ["clojure" "jank"]}]
+  :ft ["clojure" "jank" "janet"]}
+
+ ;; Janet indentation and syntax support
+ {1 "janet-lang/janet.vim"
+  :ft ["janet"]}
+
+ ;; Linting for Janet (uses janet -k)
+ {1 "mfussenegger/nvim-lint"
+  :opts (fn [_ opts]
+          (when (not opts.linters_by_ft)
+            (set opts.linters_by_ft {}))
+          (set opts.linters_by_ft.janet ["janet"]))}]

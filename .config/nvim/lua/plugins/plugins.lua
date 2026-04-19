@@ -138,4 +138,11 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "jsx", "tsx", "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
   },
+  {
+    "gruvw/strudel.nvim",
+    build = "npm ci",
+    config = function()
+      require("strudel").setup()
+    end,
+  },
 }

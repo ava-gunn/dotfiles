@@ -1,0 +1,100 @@
+%YAML 1.2
+---
+name: Janet
+file_extensions:
+  - janet
+  - jdn
+scope: source.janet
+
+contexts:
+  main:
+    - include: comments
+    - include: strings
+    - include: buffers
+    - include: numbers
+    - include: constants
+    - include: keywords
+    - include: special-forms
+    - include: builtins
+    - include: macros
+    - include: symbols
+    - include: parens
+
+  comments:
+    - match: '#'
+      scope: punctuation.definition.comment.janet
+      push:
+        - meta_scope: comment.line.janet
+        - match: $
+          pop: true
+
+  strings:
+    - match: '(`+)'
+      scope: punctuation.definition.string.begin.janet
+      push:
+        - meta_scope: string.quoted.other.janet
+        - match: '\1'
+          scope: punctuation.definition.string.end.janet
+          pop: true
+    - match: '"'
+      scope: punctuation.definition.string.begin.janet
+      push:
+        - meta_scope: string.quoted.double.janet
+        - match: '\\.'
+          scope: constant.character.escape.janet
+        - match: '"'
+          scope: punctuation.definition.string.end.janet
+          pop: true
+
+  buffers:
+    - match: '@"'
+      scope: punctuation.definition.string.begin.janet
+      push:
+        - meta_scope: string.quoted.double.janet
+        - match: '\\.'
+          scope: constant.character.escape.janet
+        - match: '"'
+          scope: punctuation.definition.string.end.janet
+          pop: true
+
+  numbers:
+    - match: '(?<=[\s\(\[\{,])[-+]?0x[0-9a-fA-F_]+(\.[0-9a-fA-F_]+)?(&[+-]?[0-9]+)?(?=[\s\)\]\},]|$)'
+      scope: constant.numeric.hex.janet
+    - match: '(?<=[\s\(\[\{,])[-+]?[0-9][0-9_]*r[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)?(&[+-]?[0-9]+)?(?=[\s\)\]\},]|$)'
+      scope: constant.numeric.radix.janet
+    - match: '(?<=[\s\(\[\{,])[-+]?[0-9][0-9_]*(\.[0-9_]+)?([eE][+-]?[0-9]+)?(?=[\s\)\]\},]|$)'
+      scope: constant.numeric.decimal.janet
+
+  constants:
+    - match: '(?<=[\s\(\[\{,])(true|false|nil)(?=[\s\)\]\},]|$)'
+      scope: constant.language.janet
+
+  keywords:
+    - match: ':[a-zA-Z0-9!@$%^&*_+\-=<>.?/][a-zA-Z0-9!@$%^&*_+\-=<>.?/]*'
+      scope: constant.other.keyword.janet
+
+  special-forms:
+    - match: '(?<=\()(def|var|fn|do|quote|if|splice|while|break|set|quasiquote|unquote|upscope|defn|defmacro|defglobal|varglobal|cond|case|when|unless|let|try|catch|match|loop|for|each|coro|fiber|yield|resume|seq|generate|defer|with|when-let|if-let|if-not|when-not|if-with|when-with|short-fn|comptime|compif|compwhen)(?=[\s\)\]\},])'
+      scope: keyword.control.janet
+
+  macros:
+    - match: '(?<=\()(\->|->>|-\?>|-\?>>|as->\?|as->|with-dyns|with-syms|with-vars|label|prompt|protect|forever|repeat|forv|eachk|eachp|case|cond|match|assert|default|comment|doc|tracev|edefer|ev/spawn|ev/do-thread|ev/with-deadline)(?=[\s\)\]\},])'
+      scope: support.function.macro.janet
+
+  builtins:
+    - match: '(?<=\()(print|prin|pp|string|string/format|string/join|string/split|string/find|string/has-prefix\?|string/has-suffix\?|string/replace|string/replace-all|string/trim|string/bytes|string/from-bytes|string/ascii-lower|string/ascii-upper|string/repeat|string/reverse|string/slice|array|array/new|array/push|array/pop|array/peek|array/concat|array/slice|array/clear|array/remove|array/insert|tuple|tuple/brackets|tuple/sourcemap|tuple/slice|tuple/type|table|table/new|table/clone|table/getproto|table/setproto|table/rawget|table/to-struct|struct|struct/getproto|struct/to-table|buffer|buffer/new|buffer/push|buffer/push-string|buffer/push-byte|buffer/popn|buffer/clear|buffer/slice|buffer/format|math/abs|math/ceil|math/floor|math/round|math/log|math/exp|math/pow|math/sqrt|math/random|math/seedrandom|math/pi|math/e|math/inf|os/exit|os/which|os/arch|os/environ|os/getenv|os/setenv|os/time|os/clock|os/sleep|os/cwd|os/cd|os/mkdir|os/rmdir|os/stat|os/lstat|os/dir|os/rename|os/rm|os/link|os/symlink|os/readlink|os/realpath|os/chmod|os/perm-int|os/perm-string|os/shell|os/execute|os/spawn|os/proc-wait|os/proc-kill|os/proc-close|file/open|file/close|file/read|file/write|file/flush|file/seek|file/temp|net/connect|net/listen|net/accept|net/read|net/write|net/close|net/chunk|net/address|ev/sleep|ev/deadline|ev/chan|ev/give|ev/take|ev/select|ev/go|ev/thread|ev/cancel|fiber/new|fiber/status|fiber/current|fiber/root|fiber/maxstack|fiber/setmaxstack|fiber/getenv|fiber/setenv|type|describe|error|freeze|length|empty\?|not|not=|apply|map|mapcat|filter|reduce|reduce2|accumulate|accumulate2|all|some|any\?|count|first|last|take|take-while|take-until|drop|drop-while|drop-until|keys|values|pairs|kvs|frequencies|group-by|sort|sort-by|sorted|sorted-by|reverse|distinct|flatten|interleave|interpose|partition|range|zipcoll|merge|merge-into|in|get|get-in|put|put-in|update|update-in|has-key\?|has-value\?|min|max|min-of|max-of|sum|product|mean|comp|complement|identity|partial|juxt|keep|walk|postwalk|prewalk|macex|macex1|make-env|make-image|load-image|import|require|use|dofile|slurp|spit|eval|parse|module/find|module/cache|module/paths|module/expand-path|module/add-paths|module/value|abstract\?|boolean\?|buffer\?|bytes\?|cfunction\?|dictionary\?|fiber\?|function\?|indexed\?|int\?|keyword\?|nat\?|nil\?|number\?|string\?|struct\?|symbol\?|table\?|tuple\?|true\?|false\?)(?=[\s\)\]\},])'
+      scope: support.function.builtin.janet
+
+  symbols:
+    - match: '[a-zA-Z!@$%^&*_+\-=<>.?/][a-zA-Z0-9!@$%^&*_+\-=<>.?/]*'
+      scope: variable.other.janet
+
+  parens:
+    - match: '[\(\)]'
+      scope: punctuation.section.parens.janet
+    - match: '[\[\]]'
+      scope: punctuation.section.brackets.janet
+    - match: '[\{\}]'
+      scope: punctuation.section.braces.janet
+    - match: '@[\(\[\{]'
+      scope: punctuation.section.mutable.janet
