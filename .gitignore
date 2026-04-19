@@ -1,2 +1,3 @@
 .config/yarn/**
 .config/raycast/extensions/**
+.DS_Store

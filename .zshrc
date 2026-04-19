@@ -38,7 +38,7 @@ zinit snippet OMZP::command-not-found
 # Vi Mode
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
-set EDITOR=nvim
+export EDITOR=nvim
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -96,7 +96,6 @@ mdn() {
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 export ZLE_RPROMPT_INDENT=4
@@ -120,29 +119,44 @@ _fzf_comprun() {
 
 
 # Herd injected PHP binary.
-export PATH="/Users/clark/Library/Application Support/Herd/bin/":$PATH
-export PATH="/Users/clark/dotfiles/.config/emacs/bin":$PATH
+export PATH="/Users/ava/Library/Application Support/Herd/bin/":$PATH
+export PATH="/Users/ava/dotfiles/.config/emacs/bin":$PATH
 
 
 # Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/config/php/82/"
+export HERD_PHP_82_INI_SCAN_DIR="/Users/ava/Library/Application Support/Herd/config/php/82/"
 
 
 # Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/config/php/83/"
+export HERD_PHP_83_INI_SCAN_DIR="/Users/ava/Library/Application Support/Herd/config/php/83/"
 
 
 # Herd injected PHP 8.4 configuration.
-export HERD_PHP_84_INI_SCAN_DIR="/Users/clark/Library/Application Support/Herd/config/php/84/"
+export HERD_PHP_84_INI_SCAN_DIR="/Users/ava/Library/Application Support/Herd/config/php/84/"
 
-# hyfetch --ascii /Users/clark/dotfiles/ascii.txt
+# hyfetch --ascii /Users/ava/dotfiles/ascii.txt
 #
 
 # bun completions
-[ -s "/Users/clark/.bun/_bun" ] && source "/Users/clark/.bun/_bun"
+[ -s "/Users/ava/.bun/_bun" ] && source "/Users/ava/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 alias ccs="codecrafters"
+
+export PATH="$HOME/.local/bin:$PATH"
+alias portkill="killport"
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [ -f .nvmrc ]; then
+    nvm use
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+
+# zoxide (must be initialized at the end)
+eval "$(zoxide init --cmd cd zsh)"
+
