@@ -15,7 +15,6 @@
       pkgs.eza
       pkgs.fd
       pkgs.less
-      pkgs.mpw
       pkgs.karabiner-elements
       pkgs.rustup
       pkgs.yazi
@@ -25,7 +24,7 @@
       pkgs.cocoapods
       pkgs.emacs
       pkgs.exercism
-      pkgs.fennel
+      pkgs.luaPackages.fennel
       pkgs.ffmpeg
       pkgs.htop
       pkgs.lazygit

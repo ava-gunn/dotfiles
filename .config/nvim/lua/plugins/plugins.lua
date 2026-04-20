@@ -7,36 +7,41 @@ return {
   },
   {
     "alexghergh/nvim-tmux-navigation",
+    keys = {
+      { "<C-h>", "<cmd>NvimTmuxNavigateLeft<cr>", mode = { "n", "t" } },
+      { "<C-j>", "<cmd>NvimTmuxNavigateDown<cr>", mode = { "n", "t" } },
+      { "<C-k>", "<cmd>NvimTmuxNavigateUp<cr>", mode = { "n", "t" } },
+      { "<C-l>", "<cmd>NvimTmuxNavigateRight<cr>", mode = { "n", "t" } },
+    },
     config = function()
       require("nvim-tmux-navigation").setup({
-        disable_when_zoomed = true, -- defaults to false
-        keybindings = {
-          left = "<C-h>",
-          down = "<C-j>",
-          up = "<C-k>",
-          right = "<C-l>",
-        },
+        disable_when_zoomed = true,
       })
     end,
   },
   {
     "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup({
-        on_open = function(_)
-          vim.opt.laststatus = 0
-          vim.fn.system([[tmux set status off]])
-          vim.fn.system([[tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z]])
-        end,
-        on_close = function(_)
-          vim.opt.laststatus = 3
-          vim.fn.system([[tmux set status on]])
-          vim.fn.system([[tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z]])
-        end,
-      })
-    end,
+    cmd = "ZenMode",
+    opts = {
+      on_open = function(_)
+        vim.opt.laststatus = 0
+        vim.fn.jobstart({ "sh", "-c", "tmux set status off" }, { detach = true })
+        vim.fn.jobstart(
+          { "sh", "-c", "tmux list-panes -F '#F' | grep -q Z || tmux resize-pane -Z" },
+          { detach = true }
+        )
+      end,
+      on_close = function(_)
+        vim.opt.laststatus = 3
+        vim.fn.jobstart({ "sh", "-c", "tmux set status on" }, { detach = true })
+        vim.fn.jobstart(
+          { "sh", "-c", "tmux list-panes -F '#F' | grep -q Z && tmux resize-pane -Z" },
+          { detach = true }
+        )
+      end,
+    },
   },
-  { "folke/twilight.nvim" },
+  { "folke/twilight.nvim", cmd = { "Twilight", "TwilightEnable", "TwilightDisable" } },
   {
     "jim-fx/sudoku.nvim",
     cmd = "Sudoku",
@@ -48,6 +53,7 @@ return {
   },
   {
     "RutaTang/compter.nvim",
+    event = "VeryLazy",
     config = function()
       require("compter").setup({
         templates = {
@@ -95,12 +101,14 @@ return {
   },
   {
     "tris203/precognition.nvim",
+    event = "VeryLazy",
     opts = {
       startVisible = true,
     },
   },
   {
     "m4xshen/hardtime.nvim",
+    event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {},
   },
@@ -125,9 +133,8 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ft = { "markdown" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
@@ -141,6 +148,7 @@ return {
   {
     "gruvw/strudel.nvim",
     build = "npm ci",
+    cmd = { "StrudelLaunch", "StrudelQuit", "StrudelToggle", "StrudelUpdate", "StrudelExecute", "StrudelStop" },
     config = function()
       require("strudel").setup()
     end,
