@@ -4,7 +4,9 @@
     config.allowUnfree = true;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Determinate Nix manages the daemon itself; nix-darwin must not touch it.
+  # Flakes and nix-command are already enabled by the Determinate installer.
+  nix.enable = false;
 
   # Declares the primary user so nix-darwin can apply user-level defaults.
   system.primaryUser = username;
@@ -30,11 +32,6 @@
 
     taps = [
       "nikitabobko/tap"
-    ];
-
-    brews = [
-      # CLI tools that don't exist / don't work well via nixpkgs on darwin.
-      "ngrok"
     ];
 
     casks = [
