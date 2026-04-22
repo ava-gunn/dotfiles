@@ -50,7 +50,7 @@ home-manager refuses to overwrite existing files at activation. Before the first
 ```sh
 for f in ~/.zshrc ~/.p10k.zsh ~/.config/ghostty/config ~/.config/tmux/tmux.conf \
          ~/.config/bat/config ~/.config/yazi/yazi.toml ~/.config/aerospace/aerospace.toml \
-         ~/.config/git/config ~/.config/gh/config.yml; do
+         ~/.config/git/config ~/.config/git/ignore ~/.config/gh/config.yml; do
   [ -e "$f" ] && [ ! -L "$f" ] && mv "$f" "$f.pre-nix"
 done
 ```
