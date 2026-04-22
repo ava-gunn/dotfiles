@@ -84,7 +84,7 @@ alias ls="eza --color=always --icons"
 alias vimconfig="vim ~/.config/nvim/init.lua"
 alias zshconfig="vim ~/.zshrc && source ~/.zshrc"
 alias la="ls -la"
-alias rebuild="darwin-rebuild switch --flake ~/dotfiles#ava"
+alias rebuild="sudo darwin-rebuild switch --flake ~/dotfiles#ava"
 alias gr="grep -Fr --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.next --exclude-dir=.git --exclude-dir=.turbo --exclude-dir=out --exclude-dir=playwright-report --exclude-dir=design-system"
 
 mdn() {
