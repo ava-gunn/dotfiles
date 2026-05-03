@@ -332,14 +332,14 @@ in {
         alt-shift-semicolon = "mode service";
 
         alt-shift-p = [
-          "exec-and-forget osascript -e 'display notification \"Aerospace shortcuts disabled\" with title \"Passthrough ON\" sound name \"Submarine\"'"
+          "exec-and-forget osascript -e 'display notification \"Aerospace shortcuts disabled\" with title \"Passthrough ON\"'"
           "mode passthrough"
         ];
       };
 
       mode.passthrough.binding = {
         alt-shift-p = [
-          "exec-and-forget osascript -e 'display notification \"Aerospace shortcuts active\" with title \"Passthrough OFF\" sound name \"Pop\"'"
+          "exec-and-forget osascript -e 'display notification \"Aerospace shortcuts active\" with title \"Passthrough OFF\"'"
           "mode main"
         ];
       };
