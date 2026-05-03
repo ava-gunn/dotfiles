@@ -244,7 +244,10 @@ in {
   programs.ghostty = {
     enable = true;
     package = null;
-    enableZshIntegration = true;
+    # Ghostty auto-injects shell integration via ZDOTDIR; enabling it here
+    # adds a redundant source in ~/.zshrc that loads AFTER powerlevel10k
+    # and corrupts the p10k Pure-style prompt (stray "}}" before ❯).
+    enableZshIntegration = false;
     installVimSyntax = false;
     settings = {
       theme = "TokyoNight Moon";
@@ -327,6 +330,18 @@ in {
         alt-tab = "workspace-back-and-forth";
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
         alt-shift-semicolon = "mode service";
+
+        alt-shift-p = [
+          "exec-and-forget osascript -e 'display notification \"Aerospace shortcuts disabled\" with title \"Passthrough ON\" sound name \"Submarine\"'"
+          "mode passthrough"
+        ];
+      };
+
+      mode.passthrough.binding = {
+        alt-shift-p = [
+          "exec-and-forget osascript -e 'display notification \"Aerospace shortcuts active\" with title \"Passthrough OFF\" sound name \"Pop\"'"
+          "mode main"
+        ];
       };
 
       mode.service.binding = {

@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config.allowUnfree = true;
@@ -35,35 +36,20 @@
     ];
 
     casks = [
-      # Terminal & shell adjacent
       "ghostty"
-
-      # Window management & input
-      # aerospace is installed via nixpkgs (see home.nix programs.aerospace).
       "karabiner-elements"
       "homerow"
-
-      # Browsers
       "firefox"
       "google-chrome"
       "zen"
-
-      # Comms
       "claude"
       "slack"
       "signal"
       "microsoft-teams"
       "zoom"
-
-      # Media / creative
       "spotify"
       "obs"
-
-      # Dev
       "visual-studio-code"
-
-      # System / drivers
-      "displaylink"
       "nordlayer"
     ];
   };
