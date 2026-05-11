@@ -33,6 +33,11 @@
 
     taps = [
       "nikitabobko/tap"
+      "FelixKratz/formulae"
+    ];
+
+    brews = [
+      "svim"
     ];
 
     casks = [
