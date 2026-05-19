@@ -269,8 +269,15 @@ in {
     launchd.enable = true;
     settings = {
       after-login-command = [ ];
-      after-startup-command = [ ];
+      after-startup-command = [
+        "exec-and-forget brew services start sketchybar"
+      ];
       start-at-login = true;
+      exec-on-workspace-change = [
+        "/bin/bash"
+        "-c"
+        "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
+      ];
       enable-normalization-flatten-containers = true;
       enable-normalization-opposite-orientation-for-nested-containers = true;
       accordion-padding = 30;
@@ -280,12 +287,12 @@ in {
       on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
 
       gaps = {
-        inner.horizontal = 20;
-        inner.vertical = 20;
-        outer.left = 20;
-        outer.bottom = 20;
-        outer.top = 20;
-        outer.right = 20;
+        inner.horizontal = 10;
+        inner.vertical = 10;
+        outer.left = 10;
+        outer.bottom = 10;
+        outer.top = 50;
+        outer.right = 10;
       };
 
       mode.main.binding = {
@@ -442,5 +449,6 @@ in {
       run --silence mkdir -p "$HOME/.config"
       link "${dotfilesDir}/.config/nvim" "$HOME/.config/nvim"
       link "${dotfilesDir}/.config/htop" "$HOME/.config/htop"
+      link "${dotfilesDir}/.config/sketchybar" "$HOME/.config/sketchybar"
     '';
 }

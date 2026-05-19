@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# SketchyBar config — paired with AeroSpace via exec-on-workspace-change.
+# Theme: TokyoNight Moon-ish, matching Ghostty.
+
+# launchd's PATH is /opt/homebrew/... only — extend it so nix-managed
+# binaries like `aerospace` are resolvable from sketchybar + plugin scripts.
+export PATH="/etc/profiles/per-user/ava/bin:/run/current-system/sw/bin:$PATH"
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+BAR_COLOR=0xcc222334    # ~80% alpha
+ICON_COLOR=0xffc8d3f5
+LABEL_COLOR=0xffc8d3f5
+ACCENT=0xff82aaff
+DIM=0x66c8d3f5
+OCCUPIED=0x33c8d3f5
+TRANSPARENT=0x00000000
+
+FONT="Hack Nerd Font"
+
+sketchybar --bar \
+  position=top \
+  height=32 \
+  margin=10 \
+  y_offset=8 \
+  blur_radius=24 \
+  color=$BAR_COLOR \
+  padding_left=10 \
+  padding_right=10 \
+  corner_radius=12 \
+  sticky=on \
+  topmost=window
+
+sketchybar --default \
+  updates=when_shown \
+  icon.font="$FONT:Bold:14.0" \
+  icon.color=$ICON_COLOR \
+  icon.padding_left=8 \
+  icon.padding_right=4 \
+  label.font="$FONT:Semibold:13.0" \
+  label.color=$LABEL_COLOR \
+  label.padding_left=4 \
+  label.padding_right=8 \
+  background.corner_radius=6 \
+  background.height=24
+
+##### AeroSpace workspaces #####
+sketchybar --add event aerospace_workspace_change
+
+while read -r sid mon; do
+  sketchybar --add item "space.$sid" left \
+    --subscribe "space.$sid" aerospace_workspace_change front_app_switched \
+    --set "space.$sid" \
+      display=$mon \
+      icon="$sid" \
+      icon.font="$FONT:Bold:13.0" \
+      icon.padding_left=10 \
+      icon.padding_right=4 \
+      label.font="$FONT:Semibold:12.0" \
+      label.padding_left=0 \
+      label.padding_right=10 \
+      padding_left=3 \
+      padding_right=3 \
+      background.corner_radius=8 \
+      background.height=22 \
+      background.drawing=on \
+      click_script="aerospace workspace $sid" \
+      script="$PLUGIN_DIR/aerospace.sh $sid"
+done < <(aerospace list-workspaces --all --format '%{workspace} %{monitor-id}')
+
+##### Center: front app #####
+sketchybar --add item front_app center \
+  --set front_app \
+    icon.drawing=off \
+    label.font="$FONT:Bold:13.0" \
+    script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+##### Right side #####
+sketchybar --add item clock right \
+  --set clock \
+    update_freq=10 \
+    icon=󰥔 \
+    icon.color=$ACCENT \
+    script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item volume right \
+  --set volume \
+    icon.color=$ACCENT \
+    script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change
+
+sketchybar --add item battery right \
+  --set battery \
+    update_freq=120 \
+    icon.color=$ACCENT \
+    script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change
+
+sketchybar --update
+
+# Prime workspace focus state on startup (no event has fired yet).
+sketchybar --trigger aerospace_workspace_change \
+  FOCUSED_WORKSPACE="$(aerospace list-workspaces --focused)"

@@ -38,6 +38,7 @@
 
     brews = [
       "svim"
+      "sketchybar"
     ];
 
     casks = [
@@ -56,6 +57,8 @@
       "obs"
       "visual-studio-code"
       "nordlayer"
+      "font-hack-nerd-font"
+      "sf-symbols"
     ];
   };
 
@@ -85,6 +88,7 @@
       NSAutomaticDashSubstitutionEnabled = false;
       NSAutomaticPeriodSubstitutionEnabled = false;
       NSAutomaticQuoteSubstitutionEnabled = false;
+      _HIHideMenuBar = true;
     };
 
     trackpad = {
