@@ -291,7 +291,7 @@ in {
         inner.vertical = 10;
         outer.left = 10;
         outer.bottom = 10;
-        outer.top = 50;
+        outer.top = [ { monitor."Built-in Retina Display" = 10; } 50 ];
         outer.right = 10;
       };
 
@@ -314,6 +314,7 @@ in {
         alt-shift-minus = "resize smart -50";
         alt-shift-equal = "resize smart +50";
 
+        alt-0 = "workspace 0";
         alt-1 = "workspace 1";
         alt-2 = "workspace 2";
         alt-3 = "workspace 3";
@@ -324,6 +325,7 @@ in {
         alt-8 = "workspace 8";
         alt-9 = "workspace 9";
 
+        alt-shift-0 = [ "move-node-to-workspace 0" "workspace 0" ];
         alt-shift-1 = [ "move-node-to-workspace 1" "workspace 1" ];
         alt-shift-2 = [ "move-node-to-workspace 2" "workspace 2" ];
         alt-shift-3 = [ "move-node-to-workspace 3" "workspace 3" ];
@@ -364,15 +366,16 @@ in {
       };
 
       workspace-to-monitor-force-assignment = {
-        "1" = "main";
-        "2" = "main";
-        "3" = "main";
-        "4" = "main";
-        "5" = "main";
-        "6" = "main";
-        "7" = "secondary";
-        "8" = "secondary";
-        "9" = "secondary";
+        "0" = "MACROSILICON";
+        "1" = "LG ULTRAWIDE";
+        "2" = "LG ULTRAWIDE";
+        "3" = "LG ULTRAWIDE";
+        "4" = "LG ULTRAWIDE";
+        "5" = "LG ULTRAWIDE";
+        "6" = "LG ULTRAWIDE";
+        "7" = "Built-in Retina Display";
+        "8" = "Built-in Retina Display";
+        "9" = "Built-in Retina Display";
       };
     };
   };

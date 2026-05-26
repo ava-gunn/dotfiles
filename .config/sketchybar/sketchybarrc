@@ -66,7 +66,7 @@ while read -r sid mon; do
       background.drawing=on \
       click_script="aerospace workspace $sid" \
       script="$PLUGIN_DIR/aerospace.sh $sid"
-done < <(aerospace list-workspaces --all --format '%{workspace} %{monitor-id}')
+done < <(aerospace list-workspaces --all --format '%{workspace} %{monitor-appkit-nsscreen-screens-id}')
 
 ##### Center: front app #####
 sketchybar --add item front_app center \
