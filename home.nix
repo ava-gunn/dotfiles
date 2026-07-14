@@ -1,7 +1,14 @@
-{ pkgs, lib, config, username, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
 let
   dotfilesDir = "${config.home.homeDirectory}/dotfiles";
-in {
+in
+{
   home = {
     stateVersion = "24.05";
     username = username;
@@ -11,32 +18,27 @@ in {
       EDITOR = "nvim";
       BAT_THEME = "tokyonight_night";
       ZLE_RPROMPT_INDENT = "4";
+      # Silence zoxide's init-order "doctor": fnm --use-on-cd / fzf / syntax-highlighting
+      # register chpwd/precmd hooks after zoxide's init, which is harmless here. Set in
+      # .zshenv (via hm-session-vars) so it's defined before .zshrc runs zoxide init.
+      _ZO_DOCTOR = "0";
     };
 
     packages = with pkgs; [
       # Dev toolchains
       ast-grep
       bash
-      bun
-      cocoapods
-      emacs
-      exercism
       ffmpeg
       fnm
       gh
       lazygit
-      leiningen
       htop
-      luaPackages.fennel
       neovim
       nixfmt
-      rustup
       tree-sitter
 
       # Utilities
       less
-      speedtest-cli
-      tldr
       tree
       wget
     ];
@@ -82,7 +84,10 @@ in {
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "command-not-found" ];
+      plugins = [
+        "git"
+        "command-not-found"
+      ];
     };
 
     plugins = [
@@ -144,6 +149,32 @@ in {
           esac
         }
 
+        # Query the ncom GraphQL endpoint for a product by URL slug.
+        # Usage: ngraph-product <slug> [prod|uat|staging|dev]   (default prod)
+        ngraph-product() {
+          emulate -L zsh
+          local slug=$1 env=$2 host
+          [[ -n $slug ]] || { print -u2 "usage: ngraph-product <slug> [prod|uat|staging|dev]"; return 1; }
+          [[ -n $env ]] || env=prod
+          case $env in
+            prod)            host=graph.nintendo.com ;;
+            uat|staging|dev) host=graph-$env.nintendo.com ;;
+            *) print -u2 "unknown env: $env (use prod|uat|staging|dev)"; return 1 ;;
+          esac
+          curl -s -X POST "https://$host/" \
+            -H 'Content-Type: application/json' \
+            -H 'x-nintendo-graph: true' \
+            -H 'locale: en-US' \
+            -H 'apollographql-client-name: ncom' \
+            -H 'apollographql-client-version: 1.0.0' \
+            -H 'NOA-Github-Access: 1HqQe2pD5g' \
+            -H 'X-Client-ID: github' \
+            -H 'X-API-Key: 7ca6da80-1978-4259-b008-10f9909e4908' \
+            -H 'User-Agent: Mozilla/5.0 Nintendo-No-Recaptcha' \
+            --data "{\"variables\":{\"urlKey\":\"$slug\"},\"query\":\"query Q(\$urlKey: String!) { product(input: { urlKey: \$urlKey }) { name sku } }\"}" \
+          | jq '.data.product'
+        }
+
         # fnm replaces nvm, but keep the auto-switch-on-cd behaviour.
         if command -v fnm >/dev/null; then
           eval "$(fnm env --use-on-cd --shell zsh)"
@@ -172,7 +203,10 @@ in {
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [ "--cmd" "cd" ];
+    options = [
+      "--cmd"
+      "cd"
+    ];
   };
 
   programs.eza = {
@@ -201,8 +235,17 @@ in {
     enable = true;
     enableZshIntegration = true;
     settings = {
-      opener.edit = [{ run = ''nvim "$@"''; block = true; }];
-      manager.ratio = [ 1 3 4 ];
+      opener.edit = [
+        {
+          run = ''nvim "$@"'';
+          block = true;
+        }
+      ];
+      manager.ratio = [
+        1
+        3
+        4
+      ];
       preview.max_width = 2500;
     };
   };
@@ -286,12 +329,22 @@ in {
       key-mapping.preset = "qwerty";
       on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
 
+      on-window-detected = [
+        {
+          "if".app-id = "com.apple.QuickTimePlayerX";
+          run = "layout floating";
+        }
+      ];
+
       gaps = {
         inner.horizontal = 10;
         inner.vertical = 10;
         outer.left = 10;
         outer.bottom = 10;
-        outer.top = [ { monitor."Built-in Retina Display" = 10; } 50 ];
+        outer.top = [
+          { monitor."Built-in Retina Display" = 10; }
+          50
+        ];
         outer.right = 10;
       };
 
@@ -325,16 +378,46 @@ in {
         alt-8 = "workspace 8";
         alt-9 = "workspace 9";
 
-        alt-shift-0 = [ "move-node-to-workspace 0" "workspace 0" ];
-        alt-shift-1 = [ "move-node-to-workspace 1" "workspace 1" ];
-        alt-shift-2 = [ "move-node-to-workspace 2" "workspace 2" ];
-        alt-shift-3 = [ "move-node-to-workspace 3" "workspace 3" ];
-        alt-shift-4 = [ "move-node-to-workspace 4" "workspace 4" ];
-        alt-shift-5 = [ "move-node-to-workspace 5" "workspace 5" ];
-        alt-shift-6 = [ "move-node-to-workspace 6" "workspace 6" ];
-        alt-shift-7 = [ "move-node-to-workspace 7" "workspace 7" ];
-        alt-shift-8 = [ "move-node-to-workspace 8" "workspace 8" ];
-        alt-shift-9 = [ "move-node-to-workspace 9" "workspace 9" ];
+        alt-shift-0 = [
+          "move-node-to-workspace 0"
+          "workspace 0"
+        ];
+        alt-shift-1 = [
+          "move-node-to-workspace 1"
+          "workspace 1"
+        ];
+        alt-shift-2 = [
+          "move-node-to-workspace 2"
+          "workspace 2"
+        ];
+        alt-shift-3 = [
+          "move-node-to-workspace 3"
+          "workspace 3"
+        ];
+        alt-shift-4 = [
+          "move-node-to-workspace 4"
+          "workspace 4"
+        ];
+        alt-shift-5 = [
+          "move-node-to-workspace 5"
+          "workspace 5"
+        ];
+        alt-shift-6 = [
+          "move-node-to-workspace 6"
+          "workspace 6"
+        ];
+        alt-shift-7 = [
+          "move-node-to-workspace 7"
+          "workspace 7"
+        ];
+        alt-shift-8 = [
+          "move-node-to-workspace 8"
+          "workspace 8"
+        ];
+        alt-shift-9 = [
+          "move-node-to-workspace 9"
+          "workspace 9"
+        ];
 
         alt-tab = "workspace-back-and-forth";
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
@@ -354,19 +437,46 @@ in {
       };
 
       mode.service.binding = {
-        esc = [ "reload-config" "mode main" ];
-        r = [ "flatten-workspace-tree" "mode main" ];
-        f = [ "layout floating tiling" "mode main" ];
-        backspace = [ "close-all-windows-but-current" "mode main" ];
+        esc = [
+          "reload-config"
+          "mode main"
+        ];
+        r = [
+          "flatten-workspace-tree"
+          "mode main"
+        ];
+        f = [
+          "layout floating tiling"
+          "mode main"
+        ];
+        backspace = [
+          "close-all-windows-but-current"
+          "mode main"
+        ];
 
-        alt-shift-h = [ "join-with left" "mode main" ];
-        alt-shift-j = [ "join-with down" "mode main" ];
-        alt-shift-k = [ "join-with up" "mode main" ];
-        alt-shift-l = [ "join-with right" "mode main" ];
+        alt-shift-h = [
+          "join-with left"
+          "mode main"
+        ];
+        alt-shift-j = [
+          "join-with down"
+          "mode main"
+        ];
+        alt-shift-k = [
+          "join-with up"
+          "mode main"
+        ];
+        alt-shift-l = [
+          "join-with right"
+          "mode main"
+        ];
       };
 
       workspace-to-monitor-force-assignment = {
-        "0" = "MACROSILICON";
+        "0" = [
+          "XGIMI TV"
+          "MACROSILICON"
+        ];
         "1" = "LG ULTRAWIDE";
         "2" = "LG ULTRAWIDE";
         "3" = "LG ULTRAWIDE";
@@ -440,18 +550,17 @@ in {
 
   # Mutable-symlink dirs. Tools rewrite files here in place (LazyVim's
   # lazy-lock.json, htop's htoprc), so plain home.file would break on rewrite.
-  home.activation.linkMutableConfigDirs =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      link() {
-        if [ -e "$2" ] && [ ! -L "$2" ]; then
-          echo "home-manager: $2 is not a symlink, skipping"
-          return
-        fi
-        run --silence ln -sfn "$1" "$2"
-      }
-      run --silence mkdir -p "$HOME/.config"
-      link "${dotfilesDir}/.config/nvim" "$HOME/.config/nvim"
-      link "${dotfilesDir}/.config/htop" "$HOME/.config/htop"
-      link "${dotfilesDir}/.config/sketchybar" "$HOME/.config/sketchybar"
-    '';
+  home.activation.linkMutableConfigDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    link() {
+      if [ -e "$2" ] && [ ! -L "$2" ]; then
+        echo "home-manager: $2 is not a symlink, skipping"
+        return
+      fi
+      run --silence ln -sfn "$1" "$2"
+    }
+    run --silence mkdir -p "$HOME/.config"
+    link "${dotfilesDir}/.config/nvim" "$HOME/.config/nvim"
+    link "${dotfilesDir}/.config/htop" "$HOME/.config/htop"
+    link "${dotfilesDir}/.config/sketchybar" "$HOME/.config/sketchybar"
+  '';
 }

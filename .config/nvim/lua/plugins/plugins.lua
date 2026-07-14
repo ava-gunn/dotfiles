@@ -26,31 +26,16 @@ return {
       on_open = function(_)
         vim.opt.laststatus = 0
         vim.fn.jobstart({ "sh", "-c", "tmux set status off" }, { detach = true })
-        vim.fn.jobstart(
-          { "sh", "-c", "tmux list-panes -F '#F' | grep -q Z || tmux resize-pane -Z" },
-          { detach = true }
-        )
+        vim.fn.jobstart({ "sh", "-c", "tmux list-panes -F '#F' | grep -q Z || tmux resize-pane -Z" }, { detach = true })
       end,
       on_close = function(_)
         vim.opt.laststatus = 3
         vim.fn.jobstart({ "sh", "-c", "tmux set status on" }, { detach = true })
-        vim.fn.jobstart(
-          { "sh", "-c", "tmux list-panes -F '#F' | grep -q Z && tmux resize-pane -Z" },
-          { detach = true }
-        )
+        vim.fn.jobstart({ "sh", "-c", "tmux list-panes -F '#F' | grep -q Z && tmux resize-pane -Z" }, { detach = true })
       end,
     },
   },
   { "folke/twilight.nvim", cmd = { "Twilight", "TwilightEnable", "TwilightDisable" } },
-  {
-    "jim-fx/sudoku.nvim",
-    cmd = "Sudoku",
-    config = function()
-      require("sudoku").setup({
-        -- configuration ...
-      })
-    end,
-  },
   {
     "RutaTang/compter.nvim",
     event = "VeryLazy",
@@ -98,13 +83,6 @@ return {
         },
       })
     end,
-  },
-  {
-    "tris203/precognition.nvim",
-    event = "VeryLazy",
-    opts = {
-      startVisible = true,
-    },
   },
   {
     "m4xshen/hardtime.nvim",

@@ -55,12 +55,24 @@
       "zoom"
       "spotify"
       "obs"
-      "visual-studio-code"
+      "blackhole-2ch"
       "nordlayer"
       "font-hack-nerd-font"
       "sf-symbols"
     ];
   };
+
+  # Homebrew refuses to load formulae from third-party taps (e.g. svim,
+  # sketchybar from FelixKratz/formulae) unless the tap is trusted. `brew trust`
+  # writes to $XDG_CONFIG_HOME/homebrew/trust.json, but nix-darwin runs
+  # `brew bundle` with a scrubbed env (only PATH preserved), so XDG_CONFIG_HOME
+  # is unset and brew reads the fallback ~/.homebrew/trust.json — which is empty.
+  # Seed it here; preActivation runs (as root) before the homebrew step.
+  system.activationScripts.preActivation.text = ''
+    install -d -m 755 -o ${username} -g staff "/Users/${username}/.homebrew"
+    printf '%s\n' '{"trustedtaps":["felixkratz/formulae"]}' > "/Users/${username}/.homebrew/trust.json"
+    chown ${username}:staff "/Users/${username}/.homebrew/trust.json"
+  '';
 
   system.defaults = {
     dock = {
