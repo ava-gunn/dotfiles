@@ -13,10 +13,11 @@ macOS setup via [Nix flakes][flakes], [nix-darwin][nix-darwin], and [home-manage
 | `flake.nix` | Flake inputs/outputs (`darwinConfigurations.ava`, `homeConfigurations.ava`) |
 | `darwin.nix` | System: Homebrew casks, fonts, `system.defaults` |
 | `home.nix` | User: shell, CLI, `programs.*` configs |
-| `.config/nvim` | LazyVim, symlinked into `~/.config/nvim` |
-| `.config/htop` | htoprc dir, symlinked into `~/.config/htop` |
+| `.config/nvim` | LazyVim, mutable symlink into `~/.config/nvim` |
+| `.config/htop` | htoprc dir, mutable symlink into `~/.config/htop` |
+| `.config/sketchybar` | Status bar config, mutable symlink into `~/.config/sketchybar` |
 | `.config/karabiner` | Manually-synced backup (see below) |
-| `.config/bat/{themes,syntaxes}` | Source read by `programs.bat` |
+| `.config/bat/themes` | TokyoNight theme read by `programs.bat` |
 | `.p10k.zsh` | Powerlevel10k config, linked to `~/.p10k.zsh` |
 
 ## First-time setup
@@ -45,7 +46,7 @@ for f in ~/.zshrc ~/.p10k.zsh ~/.config/ghostty/config ~/.config/tmux/tmux.conf 
          ~/.config/git/config ~/.config/git/ignore ~/.config/gh/config.yml; do
   [ -e "$f" ] && [ ! -L "$f" ] && mv "$f" "$f.pre-nix"
 done
-for d in ~/.config/nvim ~/.config/htop; do
+for d in ~/.config/nvim ~/.config/htop ~/.config/sketchybar; do
   [ -e "$d" ] && [ ! -L "$d" ] && mv "$d" "$d.pre-nix"
 done
 ```
@@ -61,7 +62,7 @@ No `sudo` — `darwin-rebuild` escalates internally.
 
 ### 6. Manual steps
 - Grant Accessibility/Input Monitoring to: Karabiner, AeroSpace, Homerow
-- Grant Screen Recording to: DisplayLink Manager
+- Grant Screen Recording to: OBS
 - `gh auth login`
 
 ## Ongoing
@@ -87,4 +88,5 @@ darwin-rebuild switch --flake ~/dotfiles#ava --rollback             # undo
 - **LazyVim**: `.config/nvim` is a mutable symlink back to this repo. `lazy-lock.json` is committed — let LazyVim update it, then commit.
 - **Karabiner**: rewrites `karabiner.json` atomically, which breaks symlinks, so it's not auto-linked. After meaningful changes, `cp ~/.config/karabiner/karabiner.json ~/dotfiles/.config/karabiner/`. On a fresh Mac, reverse the copy with Karabiner quit.
 - **Ghostty**: Homebrew cask (nixpkgs build is Linux-only); config via `programs.ghostty`.
+- **Sketchybar**: `.config/sketchybar` is a mutable symlink back to this repo (like nvim). Installed as a brew from the `FelixKratz/formulae` tap (auto-trusted via `~/.homebrew/trust.json`, seeded in `darwin.nix`) and started by AeroSpace on login (`brew services start sketchybar`). If the bar doesn't appear, run that manually or `sketchybar --reload`.
 - **Node**: `fnm` with `--use-on-cd`, honors `.nvmrc`.
